@@ -3,23 +3,89 @@
 @tailwind utilities;
 
 :root {
-  --background: #111827;
-  --foreground: #ffffff;
-  --primary: #ffd700;
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 51 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
+  --radius: 0.5rem;
 }
 
-.dark {
-  --background: #111827;
-  --foreground: #ffffff;
-  --primary: #ffd700;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-body {
-  background-color: #111827;
-  color: #ffffff;
-}
-
+/* Estilos específicos para los componentes */
 .btn-primary {
-  background-color: #ffd700;
-  color: #000000;
+  @apply bg-[#ffd700] text-black hover:bg-[#ffed4a] font-semibold;
+}
+
+.card {
+  @apply bg-[#1a2634] border-2 p-4 rounded-lg;
+}
+
+.card.player {
+  @apply border-emerald-500;
+}
+
+.card.enemy {
+  @apply border-red-500;
+}
+
+.card.neutral {
+  @apply border-white;
+}
+
+.card.active {
+  @apply ring-2 ring-[#ffd700];
+}
+
+.input {
+  @apply bg-[#2c3e50] text-white border-gray-600;
+}
+
+.dialog-content {
+  @apply bg-[#34495e] text-white;
+}
+
+.dialog-title {
+  @apply text-[#ffd700];
+}
+
+/* Estilos para los dados */
+.dice-button {
+  @apply bg-[#34495e] hover:bg-[#2c3e50] text-white;
+}
+
+/* Estilos para el scroll area */
+.scroll-area {
+  @apply bg-[#2c3e50] rounded-lg;
+}
+
+/* Estilos para los botones de condición */
+.condition-button {
+  @apply bg-[#2c3e50] text-white hover:bg-[#374151] transition-colors;
+}
+
+.condition-button.active {
+  @apply bg-[#ffd700] text-black hover:bg-[#ffed4a];
 }

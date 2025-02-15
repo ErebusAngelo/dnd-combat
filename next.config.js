@@ -10,9 +10,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  experimental: {
-    optimizeCss: true
-  }
+  // Removemos experimental.optimizeCss ya que requiere critters
+  // experimental: {
+  //   optimizeCss: true
+  // }
 }
 
 module.exports = nextConfig

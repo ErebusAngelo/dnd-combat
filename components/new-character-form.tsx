@@ -9,20 +9,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import type { Character } from "@/types"
 import { useState } from "react"
 
+type CharacterType = "player" | "enemy" | "neutral"
+
 interface NewCharacterFormProps {
   onSubmit: (character: Omit<Character, "id" | "conditions" | "log" | "inspiration" | "concentration">) => void
 }
 
 export function NewCharacterForm({ onSubmit }: NewCharacterFormProps) {
-  const [character, setCharacter] = useState({
+  const [character, setCharacter] = useState<{
+    name: string
+    hp: number
+    tempHp: number
+    initiative: number
+    ac: number
+    type: CharacterType
+  }>({
     name: "",
     hp: 0,
     tempHp: 0,
     initiative: 0,
     ac: 10,
-    type: "player" as const,
-    inspiration: false,
-    concentration: false,
+    type: "player",
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -101,7 +108,7 @@ export function NewCharacterForm({ onSubmit }: NewCharacterFormProps) {
         </Label>
         <Select
           value={character.type}
-          onValueChange={(value: "player" | "enemy" | "neutral") => setCharacter({ ...character, type: value })}
+          onValueChange={(value) => setCharacter({ ...character, type: value as CharacterType })}
         >
           <SelectTrigger className="bg-[#2c3e50] text-white">
             <SelectValue placeholder="Seleccionar tipo" />
@@ -119,4 +126,6 @@ export function NewCharacterForm({ onSubmit }: NewCharacterFormProps) {
     </form>
   )
 }
+
+
 

@@ -6,7 +6,5 @@
   NEXT_TELEMETRY_DISABLED = "1"
   NODE_VERSION = "18.17.0"
   NPM_FLAGS = "--legacy-peer-deps"
-
-# No necesitamos el plugin Next.js ya que estamos usando output: 'export'
-# [[plugins]]
-#   package = "@netlify/plugin-nextjs"
+  # Forzar el uso de npm
+  NETLIFY_USE_NPM = "true"

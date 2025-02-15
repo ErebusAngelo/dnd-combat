@@ -10,10 +10,12 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog"
-import { Dice1, RefreshCcw, SkipForward } from 'lucide-react'
+import { RefreshCcw, SkipForward } from 'lucide-react'
 import { CharacterCard } from "@/components/character-card"
 import { NewCharacterForm } from "@/components/new-character-form"
 import { type Character, DICE_TYPES } from "@/types"
+import { motion } from "framer-motion"
+
 
 export default function CombatTracker() {
   const [characters, setCharacters] = useState<Character[]>([])
@@ -95,11 +97,6 @@ export default function CombatTracker() {
     setCharacters(characters.map((char) => ({ ...char, log: [] })))
   }
 
-  const rollDice = (sides: number) => {
-    const result = Math.floor(Math.random() * sides) + 1
-    setDiceResult(`d${sides}: ${result}`)
-  }
-
   const updateInitiative = (charId: string, newInitiative: number) => {
     const currentChar = characters.find((c) => c.id === charId)
     if (!currentChar) return
@@ -131,19 +128,21 @@ export default function CombatTracker() {
   }
 
   return (
-    <div className="min-h-screen bg-[#111827] p-6 text-white">
+    <div className="min-h-screen bg-[#111827] p-6">
       <div className="container mx-auto">
         <div className="mb-6">
           <h1 className="text-4xl font-bold text-[#ffd700] mb-6">D&D Combat Tracker</h1>
 
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 mb-4">
-            {DICE_TYPES.map((sides) => (
-              <Button key={sides} onClick={() => rollDice(sides)} className="bg-[#34495e] hover:bg-[#2c3e50]">
-                <Dice1 className="mr-2" />d{sides}
-              </Button>
-            ))}
-          </div>
-          {diceResult && <div className="mt-4 text-xl font-bold text-[#ffd700] mb-4">{diceResult}</div>}
+          
+          {diceResult && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 text-xl font-bold text-[#ffd700] mb-4"
+            >
+              {diceResult}
+            </motion.div>
+          )}
 
           <div className="flex items-center justify-between bg-[#1a2634] p-4 rounded-lg">
             <h2 className="text-2xl font-bold text-[#ffd700]">Ronda: {round}</h2>
